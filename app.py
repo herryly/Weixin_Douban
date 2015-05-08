@@ -50,6 +50,9 @@ def getSeachResult(msg) :
     elif q.startswith('book:') :
         q = q.replace('book:', '')
         reply = create_reply(douban_wrapper.search_book(q), msg)
+    elif q.startswith('music:') :
+        q = q.replace('music:', '')
+        reply = create_reply(douban_wrapper.search_music(q), msg)
     else :
         reply = create_reply(douban_wrapper.search_book(q), msg)
 
