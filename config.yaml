@@ -1,0 +1,27 @@
+libraries:
+- name: Flask
+  version: "0.9"
+
+- name: Jinja2
+  version: "2.6"
+
+- name: SQLAlchemy
+  version: "0.8.0b2"
+
+- name: Werkzeug
+  version: "0.8.3"
+
+- name: pycrypto
+  version: "2.6.1"
+
+- name: wechatpy
+  version: "0.8.2"
+
+- name: six
+  version: "1.9.0"
+
+- name: xmltodict
+  version: "0.9.2"
+
+- name: requests
+  version: "2.7.0"
