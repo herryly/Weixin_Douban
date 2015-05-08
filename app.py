@@ -5,7 +5,7 @@ from config import APP_SECRET_KEY
 from lib.wechatpy import parse_message, create_reply
 from lib.wechatpy.utils import check_signature
 from lib.wechatpy.exceptions import InvalidSignatureException
-import douban_book
+import douban_wrapper
 
 app = Flask(__name__)
 app.debug = True
@@ -36,11 +36,24 @@ def weixin():
     else:
         msg = parse_message(request.data)
         if msg.type == 'text':
-            reply = create_reply(douban_book.search_book(msg.content), msg)
+            #reply = create_reply(douban_book.search_book(msg.content), msg)
+            reply = getSeachResult(msg)
         else:
             reply = create_reply('Sorry, can not handle this for now', msg)
         return reply.render()
 
+def getSeachResult(msg) :
+    q = msg.content.encode('utf-8')
+    if q.startswith('film:') :
+        q = q.replace('film:', '')
+        reply = create_reply(douban_wrapper.search_film(q), msg)
+    elif q.startswith('book:') :
+        q = q.replace('book:', '')
+        reply = create_reply(douban_wrapper.search_book(q), msg)
+    else :
+        reply = create_reply(douban_wrapper.search_book(q), msg)
+
+    return reply
 
 if __name__ == '__main__':
     app.run()
